@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { StartSeiteComponent } from './start-seite/start-seite.component';
 import { FragenComponent } from './fragen/fragen.component';
+import { CheckMComponent } from './check-m/check-m.component';
 
 const routes: Routes = [
 
-  {path:'',redirectTo:'welcome'},
+  {path:'',redirectTo:'start',pathMatch:'full'},
   {path:"start", component:StartSeiteComponent},
-  {path:"question", component:FragenComponent}
+  {path:"fragen", component:FragenComponent},
+  {path:"check-m", component:CheckMComponent}
 
 ];
 
