@@ -1,31 +1,87 @@
 import { Component, OnInit  } from '@angular/core';
-import { FragenService101d } from '../services/fragen.services';
+import { FragenServiceMCFragen } from '../services/fragen.services';
 
 @Component({
   selector: 'app-check-m',
   templateUrl: './check-m.component.html',
   styleUrls: ['./check-m.component.css'],
-  providers: [FragenService101d]
 })
 export class CheckMComponent implements OnInit{
+  public fragenNummer =1;
+  public frageMc : any =[];
+  public frageSc : any =[];
+  public frageFl : any =[];
+  public frageH  : any =[];
 
-  public fragenList : any =[];
-  public richtigeAntwort:number = 0;
-
-  constructor(private fragenService : FragenService101d){};
+  constructor(private fragenService : FragenServiceMCFragen){};
 
   ngOnInit(): void {
-    this.getAllFragen();
+
+    this.getFragen();
+    this.frageSc();
+    this.frageMc();
+    this.frageFl();
   }
 
+  getFragen(){
+
+    this.fragenService.getFragenMcJson()
+    .subscribe(res=>
+    {
+      this.frageMc = res;
+    })
 
 
-  getAllFragen(){
-    this.fragenService.getFragenJson()
+    this.fragenService.getFragenScJson()
+    .subscribe(res=>
+    {
+      this.frageSc = res;
 
 
-    ;
+    })
+
+    this.fragenService.getFragenFlson()
+    .subscribe(res=>
+    {
+      this.frageFl = res;
+    })
+
+
+    if(this.frageFl[this.fragenNummer].Fragenummer=this.fragenNummer)
+    {
+      this.frageH = this.frageFl
+    }
+    else
+    {
+      if(this.frageSc[this.fragenNummer].Fragenummer=this.fragenNummer)
+      {
+        this.frageH = this.frageSc
+      }
+      else
+      {
+        if(this.frageMc[this.fragenNummer].Fragenummer=this.fragenNummer)
+        {
+          this.frageH = this.frageMc
+        }
+
+      }
+
+    }
+
   }
+  weiterFrage(){
+  this.fragenNummer++;
+
+  }
+
+  zuruckFrage(){
+    if(this.fragenNummer>0)
+    {
+      this.fragenNummer--;
+    }
+
+  }
+
 }
 
 

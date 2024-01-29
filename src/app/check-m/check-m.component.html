@@ -4,25 +4,28 @@
   <div class="card mt-5">
     <h1>LPIC-1 LCE APP</h1>
   <h2>Check-Modus</h2>
+  <span>Fragen Nummer :{{frageH[fragenNummer].Fragenummer}} </span>
+  <span>Aktual Nummer :{{fragenNummer}} </span>
     <div class="progress mt-5">
       <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
     <div class="fragen mt-2">
       <div class="card">
-        <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, beatae.</h3>
+        <h3>{{frageH[fragenNummer].Fragetext}}</h3>
       </div>
     </div>
     <div class="antworten">
       <ol>
-        <li><div class="card">Lorem ipsum dolor sit amet.</div></li>
-        <li><div class="card">Lorem ipsum dolor sit amet.</div></li>
-        <li><div class="card">Lorem ipsum dolor sit amet.</div></li>
-        <li><div class="card">Lorem ipsum dolor sit amet.</div></li>
+        <li><div class="card">{{frageH[fragenNummer].A}}</div></li>
+        <li><div class="card">{{frageH[fragenNummer].B}}</div></li>
+        <li><div class="card">{{frageH[fragenNummer].C}}</div></li>
+        <li><div class="card">{{frageH[fragenNummer].D}}</div></li>
+        <li><div class="card">{{frageH[fragenNummer].E}}</div></li>
       </ol>
     </div>
     <div class="mt-5 text-center">
-      <button class="btn-primary btn-lg float-left">Zurück</button>
-      <button class="btn-primary btn-lg">Weiter</button>
-      <button class="btn-primary btn-lg float-right">Überspringen</button>
+      <button (click)="zuruckFrage()" class="btn-primary btn-lg float-left">Zurück</button>
+      <button (click)="weiterFrage()" class="btn-primary btn-lg">Weiter</button>
+      <button class="btn-primary btn-lg float-right" >Überspringen</button>
     </div>
   </div>

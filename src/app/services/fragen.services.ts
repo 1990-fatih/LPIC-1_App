@@ -1,21 +1,24 @@
 import { Injectable } from "@angular/core";
 import {HttpClient} from "@angular/common/http"
-import { Observable } from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
 
-export class FragenService101d {
+export class FragenServiceMCFragen {
 
-  private url = ("/LPIC-1_App/src/app/services/101d")
-  constructor(private http : HttpClient)
-  {
+  constructor(private http : HttpClient) { }
+
+  getFragenMcJson(){
+    return this.http.get<any>("../../assets/LPI-2019-1-102d-QA-MCFragen.json")
 
   }
 
-  getFragenJson(){
+  getFragenScJson(){
+    return this.http.get<any>("../../assets/LPI-2019-1-102d-QA-SCFragen.json")
 
-     this.http.get<any>(this.url).subscribe(result=>console.log(result))
+  }
+  getFragenFlson(){
+    return this.http.get<any>("../../assets/LPI-2019-1-102d-QA-EingabeFragen.json")
 
   }
 
