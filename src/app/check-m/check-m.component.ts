@@ -7,80 +7,59 @@ import { FragenServiceMCFragen } from '../services/fragen.services';
   styleUrls: ['./check-m.component.css'],
 })
 export class CheckMComponent implements OnInit{
-  public fragenNummer =1;
-  public frageMc : any =[];
-  public frageSc : any =[];
-  public frageFl : any =[];
+  public ClickNummer = 1;
   public frageH  : any =[];
+  public frageA  : any =[];
+
+  public frageText : any;
+  public FragenNummer : any;
+  public auswahlA : any;
+  public auswahlB : any;
+  public auswahlC : any;
+  public auswahlD : any;
+  public auswahlE : any;
 
   constructor(private fragenService : FragenServiceMCFragen){};
 
   ngOnInit(): void {
 
     this.getFragen();
-    this.frageSc();
-    this.frageMc();
-    this.frageFl();
-  }
-
-  getFragen(){
-
-    this.fragenService.getFragenMcJson()
-    .subscribe(res=>
-    {
-      this.frageMc = res;
-    })
-
-
-    this.fragenService.getFragenScJson()
-    .subscribe(res=>
-    {
-      this.frageSc = res;
-
-
-    })
-
-    this.fragenService.getFragenFlson()
-    .subscribe(res=>
-    {
-      this.frageFl = res;
-    })
-
-
-    if(this.frageFl[this.fragenNummer].Fragenummer=this.fragenNummer)
-    {
-      this.frageH = this.frageFl
+    this.frageH();
     }
-    else
-    {
-      if(this.frageSc[this.fragenNummer].Fragenummer=this.fragenNummer)
-      {
-        this.frageH = this.frageSc
-      }
-      else
-      {
-        if(this.frageMc[this.fragenNummer].Fragenummer=this.fragenNummer)
-        {
-          this.frageH = this.frageMc
-        }
-
-      }
-
-    }
-
-  }
   weiterFrage(){
-  this.fragenNummer++;
+    this.ClickNummer++;
 
-  }
+    }
+
+
 
   zuruckFrage(){
-    if(this.fragenNummer>0)
+    if(this.ClickNummer>1)
     {
-      this.fragenNummer--;
-    }
-
+        this.ClickNummer--;
+     }
   }
+  getFragen(){
+    this.fragenService.getFragen()
+    .subscribe(res=>
+    {
+      this.frageH = res;
+    })
+  }
+
+  wahlA(KorrekteAntwort,A)
+  {
+    if (KorrekteAntwort==A) {
+
+    }
+  }
+  wahlB(){}
+  wahlC(){}
+  wahlD(){}
+  wahlE(){}
+
+
+
 
 }
 

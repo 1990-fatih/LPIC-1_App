@@ -4,23 +4,23 @@
   <div class="card mt-5">
     <h1>LPIC-1 LCE APP</h1>
   <h2>Check-Modus</h2>
-  <span>Fragen Nummer :{{frageH[fragenNummer].Fragenummer}} </span>
-  <span>Aktual Nummer :{{fragenNummer}} </span>
+  <span>Fragen Nummer :{{frageH[ClickNummer].Fragenummer}} </span>
+  <span>Aktual Nummer :{{ClickNummer}} </span>
     <div class="progress mt-5">
       <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
     <div class="fragen mt-2">
       <div class="card">
-        <h3>{{frageH[fragenNummer].Fragetext}}</h3>
+        <h3>{{frageH[ClickNummer].Fragetext}}</h3>
       </div>
     </div>
     <div class="antworten">
       <ol>
-        <li><div class="card">{{frageH[fragenNummer].A}}</div></li>
-        <li><div class="card">{{frageH[fragenNummer].B}}</div></li>
-        <li><div class="card">{{frageH[fragenNummer].C}}</div></li>
-        <li><div class="card">{{frageH[fragenNummer].D}}</div></li>
-        <li><div class="card">{{frageH[fragenNummer].E}}</div></li>
+        <li (click)="wahlA(frageH[ClickNummer].KorrekteAntwort,A)"><div class="card">A: {{frageH[ClickNummer].A}}</div></li>
+        <li (click)="wahlB()"><div class="card">B: {{frageH[ClickNummer].B}}</div></li>
+        <li (click)="wahlC()"><div class="card">C: {{frageH[ClickNummer].C}}</div></li>
+        <li (click)="wahlD()"><div class="card">D: {{frageH[ClickNummer].D}}</div></li>
+        <li (click)="wahlE()"><div class="card">F: {{frageH[ClickNummer].E}}</div></li>
       </ol>
     </div>
     <div class="mt-5 text-center">

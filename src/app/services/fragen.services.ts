@@ -21,6 +21,11 @@ export class FragenServiceMCFragen {
     return this.http.get<any>("../../assets/LPI-2019-1-102d-QA-EingabeFragen.json")
 
   }
+  getFragen(){
+    return this.http.get<any>("../../assets/LPI-2019-1-102d-QA.json")
+
+  }
+
 
 }
 
