@@ -18,3 +18,9 @@ li .card:hover{
 ol{
   padding: 0;
 }
+
+
+.correct {
+  color: green;
+  font-weight: bold;
+}

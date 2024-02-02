@@ -1,31 +1,32 @@
 
-
-
-  <div class="card mt-5">
+<div  class="card mt-5">
     <h1>LPIC-1 LCE APP</h1>
   <h2>Check-Modus</h2>
-  <span>Fragen Nummer :{{frageH[ClickNummer].Fragenummer}} </span>
-  <span>Aktual Nummer :{{ClickNummer}} </span>
-    <div class="progress mt-5">
+  <div>
+
+  </div>
+  <h5>Fragen Nummer : {{fragen[ClickNummer].qid}} </h5>
+
+  <div class="progress mt-5">
       <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
-    <div class="fragen mt-2">
+    <div  class="fragen mt-2">
       <div class="card">
-        <h3>{{frageH[ClickNummer].Fragetext}}</h3>
+        <h3>{{fragen[ClickNummer].qtxt}}</h3>
       </div>
     </div>
-    <div class="antworten">
+    <div *ngFor="let item of fragen[ClickNummer].qanswers" class="antworten">
       <ol>
-        <li (click)="wahlA(frageH[ClickNummer].KorrekteAntwort,A)"><div class="card">A: {{frageH[ClickNummer].A}}</div></li>
-        <li (click)="wahlB()"><div class="card">B: {{frageH[ClickNummer].B}}</div></li>
-        <li (click)="wahlC()"><div class="card">C: {{frageH[ClickNummer].C}}</div></li>
-        <li (click)="wahlD()"><div class="card">D: {{frageH[ClickNummer].D}}</div></li>
-        <li (click)="wahlE()"><div class="card">F: {{frageH[ClickNummer].E}}</div></li>
-      </ol>
+        <li>
+          <div type="button" (click)="antwortclick(item.correct)" class="card" *ngIf="fragen[ClickNummer].qtyp != 'fi'">{{item.txt}}</div>
+          <div class="card" *ngIf="fragen[ClickNummer].qtyp == 'fi'"><input #flantwort type="text" value=""></div>
+        </li>
+       </ol>
     </div>
+
     <div class="mt-5 text-center">
       <button (click)="zuruckFrage()" class="btn-primary btn-lg float-left">Zurück</button>
-      <button (click)="weiterFrage()" class="btn-primary btn-lg">Weiter</button>
-      <button class="btn-primary btn-lg float-right" >Überspringen</button>
+      <button (click)="weiterFrage(fragen[ClickNummer].qtyp)" class="btn-primary btn-lg">Weiter</button>
+      <button (click)="ueberspringen()" class="btn-primary btn-lg float-right" >Überspringen</button>
     </div>
   </div>

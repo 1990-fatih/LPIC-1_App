@@ -1,65 +1,110 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FragenServiceMCFragen } from '../services/fragen.services';
+import { Question } from '../interfaces/question';
+import { flush } from '@angular/core/testing';
 
 @Component({
   selector: 'app-check-m',
   templateUrl: './check-m.component.html',
   styleUrls: ['./check-m.component.css'],
+
+
 })
-export class CheckMComponent implements OnInit{
-  public ClickNummer = 1;
-  public frageH  : any =[];
-  public frageA  : any =[];
+export class CheckMComponent implements OnInit {
 
-  public frageText : any;
-  public FragenNummer : any;
-  public auswahlA : any;
-  public auswahlB : any;
-  public auswahlC : any;
-  public auswahlD : any;
-  public auswahlE : any;
+  public ClickNummer = 0;
+  public fragen: Question[] = [];
+  public list : Array <string> = [];
+  public status :boolean=false
+  public frgnType:any;
 
-  constructor(private fragenService : FragenServiceMCFragen){};
+
+  aktId: number = 0
+  public frage: Question =
+  {
+    "qid": -1,
+    "qtyp": "",
+    "qtxt": [],
+    "qanswers":[],
+    "qcorrect": "",
+    "qinfo": []
+  }
+
+
+  constructor(private fragenService: FragenServiceMCFragen) { };
 
   ngOnInit(): void {
 
-    this.getFragen();
-    this.frageH();
-    }
-  weiterFrage(){
-    this.ClickNummer++;
-
-    }
-
-
-
-  zuruckFrage(){
-    if(this.ClickNummer>1)
-    {
-        this.ClickNummer--;
-     }
-  }
-  getFragen(){
-    this.fragenService.getFragen()
-    .subscribe(res=>
-    {
-      this.frageH = res;
-    })
+    // this.getFragen();
+    this.getFragenNew();
   }
 
-  wahlA(KorrekteAntwort,A)
+  getFragenNew() {
+    this.fragenService.getFragenNew()
+      .subscribe(res => {
+        this.fragen = res; this.list = []
+      })
+  }
+
+  getFragenMcNew() {
+    // wenn ich nur mc fragen haben will in this.fragen
+    this.fragenService.getFragenNew()
+      .subscribe(res => {
+        this.fragen = res.filter(q => q.qtyp == 'mc'); this.list = []
+      })
+  }
+  ersteFrage() {
+    this.aktId = 0
+    this.frage = this.fragen[this.aktId]
+
+  }
+
+  weiterFrage(a:any)
   {
-    if (KorrekteAntwort==A) {
+    this.frgnType=a
+    if(this.status)
+    {
+      this.ClickNummer++;
+      this.fragen
+      this.list = []
+      this.status=false
+    }
+   /* else
+    {
+      this.ClickNummer--;
+    }*/
+
+  }
+  ueberspringen() {
+    // aktuelle Frage NICHT auswerten und nächste Frage aufrufen
+    this.ClickNummer++;
+    this.list = []
+  }
+
+  zuruckFrage() {
+    if (this.ClickNummer > 0) {
+      this.ClickNummer--;
+    }
+    this.list = []
+  }
+
+  antwortclick(a:any,)
+  {
+
+    if(this.frgnType="mc")
+    {
 
     }
+    if (this.frgnType="sc") {
+      if (a) {
+        this.status=true
+      }
+
+    }
+
+
+
   }
-  wahlB(){}
-  wahlC(){}
-  wahlD(){}
-  wahlE(){}
-
-
-
 
 }
 
